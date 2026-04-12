@@ -5,6 +5,32 @@
 
 ---
 
+## Popis projektu (pro Daskalos)
+
+Cilem projektu je modelovat jednoduchy system pro spravu knih, autoru a uzivatelskych hodnoceni.
+
+Modelujeme:
+- Autory knih (jmeno, prijmeni, datum narozeni)
+- Knihy s vazbou na autora (nazev, rok vydani, zanr)
+- Uzivatele systemu (prihlas. jmeno, datum registrace)
+- Hodnoceni knih uzivateli (hodnota 1-5, komentar)
+
+Zjednoduseni: kazda kniha ma prave jednoho autora. Hodnoceni jsou nezavisla (jeden uzivatel muze hodnotit stejnou knihu vicekrat).
+
+### English version
+
+The goal of this project is to model a simple system for managing books, their authors, and user ratings.
+
+We model:
+- Authors (first name, last name, date of birth)
+- Books with a reference to their author (title, publication year, genre)
+- Users of the system (username, registration date)
+- Ratings of books by users (value 1-5, comment)
+
+Simplifications: each book has exactly one author. Ratings are independent — a user may rate the same book more than once.
+
+---
+
 ## Třídy
 
 | Třída | Atributy |
