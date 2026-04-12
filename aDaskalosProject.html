@@ -40,17 +40,23 @@ H3 {
 </STYLE>
 <HEAD>
 <TITLE>
-CSDK</TITLE>
+CSKD</TITLE>
 </HEAD>
 <BODY>
-<H1>CSDK</H1>
+<H1>CSKD</H1>
 <B>author&#40;s&#41;: </B>Vladim&#237;r Martinovsk&#253;
 <BR>
 <P>
-The goal of this project is to create a simple system for managing books&#44; their authors&#44; and user ratings.<BR>
-The system allows users to rate books and makes it possible to evaluate books and authors based on these ratings.<BR>
+Cilem projektu je modelovat jednoduchy system pro spravu knih&#44; autoru a uzivatelskych hodnoceni.<BR>
 <BR>
-The main problem is how to store related data and use it to get useful information&#44; such as average ratings or lists of the best books.
+Modelujeme:<BR>
+- Autory knih &#40;jmeno&#44; prijmeni&#44; datum narozeni&#41;<BR>
+- Knihy s vazbou na autora &#40;nazev&#44; rok vydani&#44; zanr&#41;<BR>
+- Uzivatele systemu &#40;prihlas. jmeno&#44; datum registrace&#41;<BR>
+- Hodnoceni knih uzivateli &#40;hodnota 1-5&#44; komentar&#41;<BR>
+<BR>
+Hodnota hodnoceni je automaticky orizena na rozsah 0-5 &#40;hodnoty mimo rozsah jsou nahrazeny nejblizsim platnym cislem&#41;.<BR>
+Kazda kniha ma prave jednoho autora. Hodnoceni jsou nezavisla &#40;jeden uzivatel muze hodnotit stejnou knihu vicekrat&#41;.
 </P>
 
 <BR>
@@ -613,6 +619,12 @@ isMasterpiece
 </CODE></B>
 <PRE>
 	^value &gt;= 4</PRE>
+<LI>
+<B><CODE>
+value: anObject 
+</CODE></B>
+<PRE>
+	value := &#40;&#40;self checkValue: anObject forVariable: &#35;value&#41; max: 0&#41; min: 5</PRE>
 </UL>
 <HR>
 <H2>Links</H2>

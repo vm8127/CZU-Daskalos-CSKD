@@ -15,7 +15,8 @@ Modelujeme:
 - Uzivatele systemu (prihlas. jmeno, datum registrace)
 - Hodnoceni knih uzivateli (hodnota 1-5, komentar)
 
-Zjednoduseni: kazda kniha ma prave jednoho autora. Hodnoceni jsou nezavisla (jeden uzivatel muze hodnotit stejnou knihu vicekrat).
+Hodnota hodnoceni je automaticky orizena na rozsah 0-5 (hodnoty mimo rozsah jsou nahrazeny nejblizsim platnym cislem).
+Kazda kniha ma prave jednoho autora. Hodnoceni jsou nezavisla (jeden uzivatel muze hodnotit stejnou knihu vicekrat).
 
 ### English version
 
@@ -28,6 +29,7 @@ We model:
 - Ratings of books by users (value 1-5, comment)
 
 Simplifications: each book has exactly one author. Ratings are independent — a user may rate the same book more than once.
+Rating values are automatically clamped to the range 0–5 (values outside the range are replaced by the nearest valid number).
 
 ---
 
