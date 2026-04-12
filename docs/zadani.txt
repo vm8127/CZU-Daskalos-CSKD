@@ -1,0 +1,41 @@
+1. Každý student vytváří samostatně svůj vlastní projekt. Součástí projektu je popis problému, který projekt řeší.
+
+2. Primárním prostředkem pro vytváření semestrálního projektu je výukový nástroj Daskalos.
+
+3. Po konzultaci s vyučujícím je možné vytvořit projekt i v jiném programovacím jazyku. Musí ale splňovat veškeré náležitosti standardního projektu a použitý jazyk musí umět dotazování nad objekty deklarativním způsobem (např. LINQ v .NET).
+
+4. Projekt musí obsahovat minimálně 3 datové třídy objektů. V případě dědění rozhoduje o zahrnutí tříd do minimálního počtu jejich role (bude vysvětleno při výuce).
+
+5. Projekt musí obsahovat minimálně 3 metody, které v rámci objektové struktury implementují odvozené atributy objektů.
+
+6. Projekt musí obsahovat nejméně 3 dotazy a pravidla, které nejsou jen nad jednou třídou objektů.
+
+7. Dotazy i pravidla je možné "schovat" do metod objektů.
+
+8. Každá třída musí obsahovat nejméně 3 konkrétní instance s reálnými daty.
+
+9. Projekt musí splňovat pravidla objektových normálních forem.
+
+10. Pokud jsou v projektu využity návrhové vzory nebo jiné pokročilé techniky návrhu, měly by být uvedeny v dokumentaci.
+Naposledy změněno: středa, 9. března 2022, 10.36
+
+1. Každý student vytváří samostatně svůj vlastní projekt. Součástí projektu je popis problému, který projekt řeší.
+
+2. Primárním prostředkem pro vytváření semestrálního projektu je výukový nástroj Daskalos.
+
+3. Po konzultaci s vyučujícím je možné vytvořit projekt i v jiném programovacím jazyku. Musí ale splňovat veškeré náležitosti standardního projektu a použitý jazyk musí umět dotazování nad objekty deklarativním způsobem (např. LINQ v .NET).
+
+4. Projekt musí obsahovat minimálně 3 datové třídy objektů. V případě dědění rozhoduje o zahrnutí tříd do minimálního počtu jejich role (bude vysvětleno při výuce).
+
+5. Projekt musí obsahovat minimálně 3 metody, které v rámci objektové struktury implementují odvozené atributy objektů.
+
+6. Projekt musí obsahovat nejméně 3 dotazy a pravidla, které nejsou jen nad jednou třídou objektů.
+
+7. Dotazy i pravidla je možné "schovat" do metod objektů.
+
+8. Každá třída musí obsahovat nejméně 3 konkrétní instance s reálnými daty.
+
+9. Projekt musí splňovat pravidla objektových normálních forem.
+
+10. Pokud jsou v projektu využity návrhové vzory nebo jiné pokročilé techniky návrhu, měly by být uvedeny v dokumentaci.
+Naposledy změněno: středa, 9. března 2022, 10.36

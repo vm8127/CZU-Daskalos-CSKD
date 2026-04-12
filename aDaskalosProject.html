@@ -1,0 +1,633 @@
+<HTML>
+<STYLE TYPE="TEXT/CSS">
+TABLE.UML {
+	BORDER-WIDTH: 1PX 1PX 1PX 1PX;
+	BORDER-SPACING: 0PX;
+	BORDER-STYLE: SOLID SOLID SOLID SOLID;
+	BORDER-COLOR: BLACK BLACK BLACK BLACK;
+	BORDER-COLLAPSE: SEPARATE;
+	BACKGROUND-COLOR: WHITE;
+}
+
+CODE {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 80%;
+}
+
+PRE {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 80%;
+}
+
+H1 {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 144%;
+	FONT-STYLE: BOLD;
+}
+
+H2 {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 120%;
+	FONT-STYLE: BOLD;
+}
+
+H3 {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 100%;
+	FONT-STYLE: BOLD;
+}
+
+</STYLE>
+<HEAD>
+<TITLE>
+CSDK</TITLE>
+</HEAD>
+<BODY>
+<H1>CSDK</H1>
+<B>author&#40;s&#41;: </B>Vladim&#237;r Martinovsk&#253;
+<BR>
+<P>
+The goal of this project is to create a simple system for managing books&#44; their authors&#44; and user ratings.<BR>
+The system allows users to rate books and makes it possible to evaluate books and authors based on these ratings.<BR>
+<BR>
+The main problem is how to store related data and use it to get useful information&#44; such as average ratings or lists of the best books.
+</P>
+
+<BR>
+<HR>
+<H2>Workspace</H2>
+<PRE>&quot;vsechny knihy od Orwella&quot;
+Books select: [:b | b author surname = &#39;Orwell&#39;]
+
+&quot;vsechny ratings od uzivatele john_doe&quot;
+Ratings select: [:r | r user username = &#39;john_doe&#39;]
+
+&quot;knihy s rating &gt; 4&quot;
+Books select: [:b | b averageRating &gt; 4]
+
+&quot;knihy s rating &gt; 4 serazen&#233; sestupne podle ratingu&quot;
+&#40;Books select: [:b | b averageRating &gt; 4]&#41; asSortedCollection: [:a :b | a averageRating &gt; b averageRating]
+
+&quot;knihy serazen&#233; sestupne podle ratingu&quot;
+Books asSortedCollection: [:a :b | a averageRating &gt; b averageRating]
+
+&quot;debut autora&quot;
+&#40;Books asSortedCollection: [:a :b | a publicationYear &lt; b publicationYear]&#41; detect: [:b | b author fullName = &#39;Dick Francis&#39;]
+
+&quot;posledn&#237; autorovo d&#237;lo&quot;
+&#40;Books asSortedCollection: [:a :b | a publicationYear &gt; b publicationYear]&#41; detect: [:b | b author fullName = &#39;Dick Francis&#39;]
+
+&quot;vsechny knihy od Dicka Francise&quot;
+Books select: [:b | b author fullName = &#39;Dick Francis&#39;]</PRE>
+<H4>Workspace Objects</H4>
+<UL>
+
+<BR>
+<LI>
+<CODE>
+Authors :Set
+</CODE>
+<LI>
+<CODE>
+Books :Set
+</CODE>
+<LI>
+<CODE>
+Ratings :Set
+</CODE>
+<LI>
+<CODE>
+Users :Set
+</CODE>
+</UL>
+
+<BR>
+<HR>
+<H2>Script</H2>
+<PRE>&quot;=============================================================================================&quot;
+&quot;AUTORI&quot;
+&quot;=============================================================================================&quot;
+
+Authors := Set new.
+
+a1 := Author new.
+a1 name: &#39;George&#39;;
+    surname: &#39;Orwell&#39;;
+    birthday: &#39;25-JUN-1903&#39; asDate.
+
+a2 := Author new.
+a2 name: &#39;Joanne&#39;;
+    surname: &#39;Rowling&#39;;
+    birthday: &#39;31-JUL-1965&#39; asDate.
+
+a3 := Author new.
+a3 name: &#39;Dick&#39;;
+    surname: &#39;Francis&#39;;
+    birthday: &#39;31-OCT-1920&#39; asDate.
+
+Authors add: a1; add: a2; add: a3.
+
+&quot;=============================================================================================&quot;
+&quot;KNIHY&quot;
+&quot;=============================================================================================&quot;
+
+Books := Set new.
+
+b1 := Book new.
+b1 name: &#39;1984&#39;;
+    publicationYear: 1949;
+    genre: &#39;Dystopian&#39;;
+    author: a1.
+
+b2 := Book new.
+b2 name: &#39;Animal Farm&#39;;
+    publicationYear: 1945;
+    genre: &#39;Satire&#39;;
+    author: a1.
+
+b3 := Book new.
+b3 name: &#39;Harry Potter and the Philosopher&#39;&#39;s Stone&#39;;
+    publicationYear: 1997;
+    genre: &#39;Fantasy&#39;;
+    author: a2.
+
+b4 := Book new.
+b4 name: &#39;Dead Cert&#39;;
+    publicationYear: 1962;
+    genre: &#39;Crime&#39;;
+    author: a3.
+
+b5 := Book new.
+b5 name: &#39;Nerve&#39;;
+    publicationYear: 1964;
+    genre: &#39;Thriller&#39;;
+    author: a3.
+
+b6 := Book new.
+b6 name: &#39;Odds Against&#39;;
+    publicationYear: 1965;
+    genre: &#39;Crime&#39;;
+    author: a3.
+
+Books add: b1; add: b2; add: b3; add: b4; add: b5; add: b6.
+
+&quot;=============================================================================================&quot;
+&quot;U&#381;IVATEL&#201;&quot;
+&quot;=============================================================================================&quot;
+
+Users := Set new.
+
+u1 := User new.
+u1 username: &#39;john_doe&#39;;
+    registrationDate: &#39;10-MAY-2023&#39; asDate.
+
+u2 := User new.
+u2 username: &#39;jane_doe&#39;;
+    registrationDate: &#39;18-FEB-2024&#39; asDate.
+
+u3 := User new.
+u3 username: &#39;horse_fan&#39;;
+    registrationDate: &#39;05-NOV-2023&#39; asDate.
+
+Users add: u1; add: u2; add: u3.
+
+&quot;=============================================================================================&quot;
+&quot;HODNOCEN&#205;&quot;
+&quot;=============================================================================================&quot;
+
+Ratings := Set new.
+
+h1 := Rating new.
+h1 book: b1;
+    user: u1;
+    value: 5;
+    comment: &#39;Amazing&#39;.
+
+h2 := Rating new.
+h2 book: b1;
+    user: u2;
+    value: 4;
+    comment: &#39;Very good&#39;.
+
+h3 := Rating new.
+h3 book: b3;
+    user: u1;
+    value: 5;
+    comment: &#39;Loved it&#39;.
+
+h4 := Rating new.
+h4 book: b3;
+    user: u2;
+    value: 1;
+    comment: &#39;Horrendous&#39;.
+
+h5 := Rating new.
+h5 book: b4;
+    user: u1;
+    value: 4;
+    comment: &#39;Classic racing thriller&#39;.
+
+h6 := Rating new.
+h6 book: b4;
+    user: u3;
+    value: 5;
+    comment: &#39;Brilliant debut&#39;.
+
+h7 := Rating new.
+h7 book: b2;
+    user: u3;
+    value: 5;
+    comment: &#39;Masterpiece of satire&#39;.
+
+Ratings add: h1; add: h2; add: h3; add: h4; add: h5; add: h6; add: h7.
+</PRE>
+<HR>
+<H2>Diagram</H2>
+<IMG SRC="aDaskalosProject.gif">
+<HR>
+<H2>Classes</H2>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Author
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+birthday :Date
+</CODE>
+<BR>
+<CODE>
+name :String
+</CODE>
+<BR>
+<CODE>
+surname :String
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+birthday
+</CODE>
+<BR>
+<CODE>
+birthday:
+</CODE>
+<BR>
+<CODE>
+fullName
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+name
+</CODE>
+<BR>
+<CODE>
+name:
+</CODE>
+<BR>
+<CODE>
+surname
+</CODE>
+<BR>
+<CODE>
+surname:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+fullName
+</CODE></B>
+<PRE>
+	^name &#44; &#39; &#39; &#44; surname</PRE>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     name := nil.
+     surname := nil.
+     birthday := nil.</PRE>
+</UL>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Book
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+author :Object
+</CODE>
+<BR>
+<CODE>
+genre :String
+</CODE>
+<BR>
+<CODE>
+name :String
+</CODE>
+<BR>
+<CODE>
+publicationYear :Number
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+age
+</CODE>
+<BR>
+<CODE>
+author
+</CODE>
+<BR>
+<CODE>
+author:
+</CODE>
+<BR>
+<CODE>
+averageRating
+</CODE>
+<BR>
+<CODE>
+genre
+</CODE>
+<BR>
+<CODE>
+genre:
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+name
+</CODE>
+<BR>
+<CODE>
+name:
+</CODE>
+<BR>
+<CODE>
+publicationYear
+</CODE>
+<BR>
+<CODE>
+publicationYear:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+age
+</CODE></B>
+<PRE>
+	^Date today year - publicationYear</PRE>
+<LI>
+<B><CODE>
+averageRating
+</CODE></B>
+<PRE>
+	| ratings |
+	ratings := Rating allInstances select: [:r | r book = self].
+	ratings isEmpty ifTrue: [^0].
+	^&#40;ratings collect: [:r | r value]&#41; avg asFloat</PRE>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     name := nil.
+     publicationYear := nil.
+     genre := nil.
+     author := nil.</PRE>
+</UL>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+User
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+registrationDate :Date
+</CODE>
+<BR>
+<CODE>
+username :String
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+registrationDate
+</CODE>
+<BR>
+<CODE>
+registrationDate:
+</CODE>
+<BR>
+<CODE>
+username
+</CODE>
+<BR>
+<CODE>
+username:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     username := nil.
+     registrationDate := nil.</PRE>
+</UL>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Rating
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+book :Object
+</CODE>
+<BR>
+<CODE>
+comment :String
+</CODE>
+<BR>
+<CODE>
+user :Object
+</CODE>
+<BR>
+<CODE>
+value :Number
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+book
+</CODE>
+<BR>
+<CODE>
+book:
+</CODE>
+<BR>
+<CODE>
+comment
+</CODE>
+<BR>
+<CODE>
+comment:
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+isMasterpiece
+</CODE>
+<BR>
+<CODE>
+user
+</CODE>
+<BR>
+<CODE>
+user:
+</CODE>
+<BR>
+<CODE>
+value
+</CODE>
+<BR>
+<CODE>
+value:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     book := nil.
+     user := nil.
+     value := nil.
+     comment := nil.</PRE>
+<LI>
+<B><CODE>
+isMasterpiece
+</CODE></B>
+<PRE>
+	^value &gt;= 4</PRE>
+</UL>
+<HR>
+<H2>Links</H2>
+<A HREF="aDaskalosProject.xml">Data file</A> and 
+<A HREF="aDaskalosProject.st">class source</A>.
+
+<BR>
+
+<BR>
+<CODE>
+Generated by Daskalos - Object Modeling Tutor &#40;C&#41; 2006 V. Merunka
+</CODE>
+
+<BR>
+<CODE>
+April 12&#44; 2026
+</CODE>
+</BODY></HTML>

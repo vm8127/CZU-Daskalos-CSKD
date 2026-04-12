@@ -1,0 +1,96 @@
+<sixx sixx.version="1.0">
+	<sixx.object sixx.id="0" sixx.type="DaskalosProject" >
+		<sixx.object sixx.id="1" sixx.name="name" sixx.type="String" >s</sixx.object>
+		<sixx.object sixx.id="2" sixx.name="author" sixx.type="String" >s</sixx.object>
+		<sixx.object sixx.id="3" sixx.name="description" sixx.type="String" >s</sixx.object>
+		<sixx.object sixx.id="4" sixx.name="workspaceVariables" sixx.type="Dictionary" >
+			<sixx.object sixx.id="5" sixx.type="Association" >
+				<sixx.object sixx.id="6" sixx.name="key" sixx.type="Symbol" >x</sixx.object>
+				<sixx.object sixx.id="7" sixx.name="value" sixx.type="Pokus" >
+					<sixx.object sixx.id="8" sixx.name="datumNarozeni" sixx.type="Date" >15 January 2000</sixx.object>
+					<sixx.object sixx.id="9" sixx.name="rodneCislo" sixx.type="String" >000115/1234</sixx.object>
+					<sixx.object sixx.id="10" sixx.name="rodneCisloCislo" sixx.type="UndefinedObject" >nil</sixx.object>
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="11" sixx.type="Association" >
+				<sixx.object sixx.id="12" sixx.name="key" sixx.type="Symbol" >b</sixx.object>
+				<sixx.object sixx.id="13" sixx.name="value" sixx.type="Bag" >
+					<sixx.object sixx.id="14" sixx.type="TridaB" >
+					</sixx.object>
+					<sixx.object sixx.id="15" sixx.type="TridaA" >
+					</sixx.object>
+					<sixx.object sixx.id="16" sixx.type="TridaA" >
+					</sixx.object>
+					<sixx.object sixx.id="17" sixx.type="TridaA" >
+					</sixx.object>
+					<sixx.object sixx.id="18" sixx.type="TridaB" >
+					</sixx.object>
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="19" sixx.type="Association" >
+				<sixx.object sixx.id="20" sixx.name="key" sixx.type="Symbol" >y</sixx.object>
+				<sixx.object sixx.id="21" sixx.name="value" sixx.type="Pokus" >
+					<sixx.object sixx.idref="10" sixx.name="datumNarozeni" ></sixx.object>
+					<sixx.object sixx.idref="10" sixx.name="rodneCislo" ></sixx.object>
+					<sixx.object sixx.idref="10" sixx.name="rodneCisloCislo" ></sixx.object>
+				</sixx.object>
+			</sixx.object>
+		</sixx.object>
+		<sixx.object sixx.id="22" sixx.name="workspaceText" sixx.type="String" >VisualLauncher open
+
+x := Pokus new.
+x datumNarozeni: &#39;15-JAN-2000&#39; asDate.
+x rodneCislo: &#39;000115/1234&#39;.
+
+y := Pokus new.
+
+
+&#40;123456 printString&#41; at: 3
+
+b := Bag new.
+b add: &#40;TridaA new&#41;; add: &#40;TridaB new&#41;; add: &#40;TridaA new&#41;; add: &#40;TridaA new&#41;; add: &#40;TridaB new&#41;.
+
+b select: [:t | t class name asString = &#39;TridaA&#39;]
+b select: [:t | t class name = &#35;TridaA]</sixx.object>
+		<sixx.object sixx.id="23" sixx.name="scriptText" sixx.type="String" >&quot;Note that variables begining with uppercase letter will be moved into the workspace pool.&quot;</sixx.object>
+		<sixx.object sixx.id="24" sixx.name="messagesWithParMode" sixx.type="Symbol" >sendOnly</sixx.object>
+		<sixx.object sixx.id="25" sixx.name="messagesWithoutParMode" sixx.type="Symbol" >sendAndBrowse</sixx.object>
+		<sixx.object sixx.id="26" sixx.name="diagramSymbols" sixx.type="Set" >
+			<sixx.object sixx.id="27" sixx.type="DaskalosClassSymbol" >
+				<sixx.object sixx.id="28" sixx.name="subject" sixx.type="Symbol" >TridaA</sixx.object>
+				<sixx.object sixx.id="29" sixx.name="position" sixx.type="Rectangle" >
+					<sixx.object sixx.id="30" sixx.name="origin" sixx.type="Point" >160@30</sixx.object>
+					<sixx.object sixx.id="31" sixx.name="corner" sixx.type="Point" >260@180</sixx.object>
+				</sixx.object>
+				<sixx.object sixx.idref="10" sixx.name="methodsText" ></sixx.object>
+				<sixx.object sixx.idref="10" sixx.name="instVarsText" ></sixx.object>
+				<sixx.object sixx.id="32" sixx.name="compositionConnections" sixx.type="Set" >
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="33" sixx.type="DaskalosClassSymbol" >
+				<sixx.object sixx.id="34" sixx.name="subject" sixx.type="Symbol" >Pokus</sixx.object>
+				<sixx.object sixx.id="35" sixx.name="position" sixx.type="Rectangle" >
+					<sixx.object sixx.id="36" sixx.name="origin" sixx.type="Point" >30@30</sixx.object>
+					<sixx.object sixx.id="37" sixx.name="corner" sixx.type="Point" >130@180</sixx.object>
+				</sixx.object>
+				<sixx.object sixx.idref="10" sixx.name="methodsText" ></sixx.object>
+				<sixx.object sixx.idref="10" sixx.name="instVarsText" ></sixx.object>
+				<sixx.object sixx.id="38" sixx.name="compositionConnections" sixx.type="Set" >
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="39" sixx.type="DaskalosClassSymbol" >
+				<sixx.object sixx.id="40" sixx.name="subject" sixx.type="Symbol" >TridaB</sixx.object>
+				<sixx.object sixx.id="41" sixx.name="position" sixx.type="Rectangle" >
+					<sixx.object sixx.id="42" sixx.name="origin" sixx.type="Point" >290@30</sixx.object>
+					<sixx.object sixx.id="43" sixx.name="corner" sixx.type="Point" >390@180</sixx.object>
+				</sixx.object>
+				<sixx.object sixx.idref="10" sixx.name="methodsText" ></sixx.object>
+				<sixx.object sixx.idref="10" sixx.name="instVarsText" ></sixx.object>
+				<sixx.object sixx.id="44" sixx.name="compositionConnections" sixx.type="Set" >
+				</sixx.object>
+			</sixx.object>
+		</sixx.object>
+		<sixx.object sixx.id="45" sixx.name="diagramConnections" sixx.type="Set" >
+		</sixx.object>
+	</sixx.object>
+</sixx>

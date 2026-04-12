@@ -1,0 +1,210 @@
+<sixx sixx.version="1.0">
+	<sixx.object sixx.id="0" sixx.type="DaskalosProject" >
+		<sixx.object sixx.id="1" sixx.name="name" sixx.type="String" >Faktury</sixx.object>
+		<sixx.object sixx.id="2" sixx.name="author" sixx.type="String" >vv</sixx.object>
+		<sixx.object sixx.id="3" sixx.name="description" sixx.type="String" >vv</sixx.object>
+		<sixx.object sixx.id="4" sixx.name="workspaceVariables" sixx.type="Dictionary" >
+			<sixx.object sixx.id="5" sixx.type="Association" >
+				<sixx.object sixx.id="6" sixx.name="key" sixx.type="Symbol" >Faktury</sixx.object>
+				<sixx.object sixx.id="7" sixx.name="value" sixx.type="Set" >
+					<sixx.object sixx.id="8" sixx.type="Faktura" >
+						<sixx.object sixx.id="9" sixx.name="cislo" sixx.type="SmallInteger" >1002</sixx.object>
+						<sixx.object sixx.id="10" sixx.name="polozky" sixx.type="Bag" >
+							<sixx.object sixx.id="11" sixx.type="Zbozi" >
+								<sixx.object sixx.id="12" sixx.name="nazev" sixx.type="String" >Pivo</sixx.object>
+								<sixx.object sixx.id="13" sixx.name="cena" sixx.type="SmallInteger" >20</sixx.object>
+							</sixx.object>
+							<sixx.object sixx.id="14" sixx.type="Zbozi" >
+								<sixx.object sixx.id="15" sixx.name="nazev" sixx.type="String" >Rohlik</sixx.object>
+								<sixx.object sixx.id="16" sixx.name="cena" sixx.type="SmallInteger" >2</sixx.object>
+							</sixx.object>
+							<sixx.object sixx.idref="14" ></sixx.object>
+							<sixx.object sixx.id="17" sixx.type="Zbozi" >
+								<sixx.object sixx.id="18" sixx.name="nazev" sixx.type="String" >Houska</sixx.object>
+								<sixx.object sixx.id="19" sixx.name="cena" sixx.type="SmallInteger" >3</sixx.object>
+							</sixx.object>
+							<sixx.object sixx.id="20" sixx.type="Zbozi" >
+								<sixx.object sixx.id="21" sixx.name="nazev" sixx.type="String" >Chleb</sixx.object>
+								<sixx.object sixx.id="22" sixx.name="cena" sixx.type="SmallInteger" >29</sixx.object>
+							</sixx.object>
+						</sixx.object>
+					</sixx.object>
+					<sixx.object sixx.id="23" sixx.type="Faktura" >
+						<sixx.object sixx.id="24" sixx.name="cislo" sixx.type="SmallInteger" >1001</sixx.object>
+						<sixx.object sixx.id="25" sixx.name="polozky" sixx.type="Bag" >
+							<sixx.object sixx.id="26" sixx.type="Zbozi" >
+								<sixx.object sixx.id="27" sixx.name="nazev" sixx.type="String" >Mleko</sixx.object>
+								<sixx.object sixx.id="28" sixx.name="cena" sixx.type="SmallInteger" >15</sixx.object>
+							</sixx.object>
+							<sixx.object sixx.idref="14" ></sixx.object>
+							<sixx.object sixx.idref="14" ></sixx.object>
+							<sixx.object sixx.idref="14" ></sixx.object>
+							<sixx.object sixx.idref="17" ></sixx.object>
+							<sixx.object sixx.idref="17" ></sixx.object>
+							<sixx.object sixx.idref="20" ></sixx.object>
+						</sixx.object>
+					</sixx.object>
+					<sixx.object sixx.id="29" sixx.type="Faktura" >
+						<sixx.object sixx.id="30" sixx.name="cislo" sixx.type="SmallInteger" >1003</sixx.object>
+						<sixx.object sixx.id="31" sixx.name="polozky" sixx.type="Bag" >
+							<sixx.object sixx.idref="11" ></sixx.object>
+							<sixx.object sixx.idref="11" ></sixx.object>
+							<sixx.object sixx.idref="11" ></sixx.object>
+							<sixx.object sixx.idref="11" ></sixx.object>
+						</sixx.object>
+					</sixx.object>
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="32" sixx.type="Association" >
+				<sixx.object sixx.id="33" sixx.name="key" sixx.type="Symbol" >Sortiment</sixx.object>
+				<sixx.object sixx.id="34" sixx.name="value" sixx.type="Set" >
+					<sixx.object sixx.idref="11" ></sixx.object>
+					<sixx.object sixx.idref="26" ></sixx.object>
+					<sixx.object sixx.idref="17" ></sixx.object>
+					<sixx.object sixx.idref="14" ></sixx.object>
+					<sixx.object sixx.idref="20" ></sixx.object>
+				</sixx.object>
+			</sixx.object>
+		</sixx.object>
+		<sixx.object sixx.id="35" sixx.name="workspaceText" sixx.type="String" >&#40;&#40;&#40;&#40;Faktury select: [:f | f cislo = 1001 ]&#41; collect: [:e | e polozky]&#41; flatten&#41; collect: [:z | z cena]&#41; sum
+
+&#40;&#40;&#40;&#40;Faktury collect: [:e | e polozky]&#41; flatten&#41; collect: [:z | z cena]&#41;  &#41; sum
+
+&#40;Faktury asBag collect: [:f | f celkovaCena ]&#41; sum</sixx.object>
+		<sixx.object sixx.id="36" sixx.name="scriptText" sixx.type="String" >z1 := Zbozi new.
+z1 nazev: &#39;Chleb&#39;; cena: 29.
+
+z2 := Zbozi new.
+z2 nazev: &#39;Rohlik&#39;; cena: 2.
+
+z3 := Zbozi new.
+z3 nazev: &#39;Houska&#39;; cena: 3.
+
+z4 := Zbozi new.
+z4 nazev: &#39;Mleko&#39;; cena: 15.
+
+z5 := Zbozi new.
+z5 nazev: &#39;Pivo&#39;; cena: 20.
+
+Sortiment := Set new.
+Sortiment add: z1; add: z2; add: z3; add: z4; add: z5.
+
+f1 := Faktura new.
+f1 cislo: 1001.
+f1 polozky add: z1; add: z2; add: z2; add: z2; add: z3; add: z3; add: z4.
+
+f2 := Faktura new.
+f2 cislo: 1002.
+f2 polozky add: z1; add: z2; add: z2;  add: z3; add: z5.
+
+f3 := Faktura new.
+f3 cislo: 1003.
+f3 polozky add: z5; add: z5; add: z5; add: z5.
+
+Faktury := Set new.
+Faktury add: f1; add: f2; add: f3.
+</sixx.object>
+		<sixx.object sixx.id="37" sixx.name="messagesWithParMode" sixx.type="Symbol" >sendOnly</sixx.object>
+		<sixx.object sixx.id="38" sixx.name="messagesWithoutParMode" sixx.type="Symbol" >sendAndBrowse</sixx.object>
+		<sixx.object sixx.id="39" sixx.name="diagramSymbols" sixx.type="Set" >
+			<sixx.object sixx.id="40" sixx.type="DaskalosCollectionSymbol" >
+				<sixx.object sixx.idref="7" sixx.name="subject" ></sixx.object>
+				<sixx.object sixx.id="41" sixx.name="position" sixx.type="Rectangle" >
+					<sixx.object sixx.id="42" sixx.name="origin" sixx.type="Point" >160@300</sixx.object>
+					<sixx.object sixx.id="43" sixx.name="corner" sixx.type="Point" >260@383</sixx.object>
+				</sixx.object>
+				<sixx.object sixx.id="44" sixx.name="name" sixx.type="String" >Faktury</sixx.object>
+				<sixx.object sixx.id="45" sixx.name="borderPoints" sixx.type="List" >
+					<sixx.object sixx.id="46" sixx.type="Point" >160@316</sixx.object>
+					<sixx.object sixx.id="47" sixx.type="Point" >210@300</sixx.object>
+					<sixx.object sixx.id="48" sixx.type="Point" >260@316</sixx.object>
+					<sixx.object sixx.id="49" sixx.type="Point" >260@367</sixx.object>
+					<sixx.object sixx.id="50" sixx.type="Point" >210@383</sixx.object>
+					<sixx.object sixx.id="51" sixx.type="Point" >160@367</sixx.object>
+					<sixx.object sixx.idref="46" ></sixx.object>
+				</sixx.object>
+				<sixx.object sixx.id="52" sixx.name="innerRectangle" sixx.type="Rectangle" >
+					<sixx.object sixx.id="53" sixx.name="origin" sixx.type="Point" >161@317</sixx.object>
+					<sixx.object sixx.id="54" sixx.name="corner" sixx.type="Point" >259@366</sixx.object>
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="55" sixx.type="DaskalosCollectionSymbol" >
+				<sixx.object sixx.idref="34" sixx.name="subject" ></sixx.object>
+				<sixx.object sixx.id="56" sixx.name="position" sixx.type="Rectangle" >
+					<sixx.object sixx.id="57" sixx.name="origin" sixx.type="Point" >30@300</sixx.object>
+					<sixx.object sixx.id="58" sixx.name="corner" sixx.type="Point" >130@383</sixx.object>
+				</sixx.object>
+				<sixx.object sixx.id="59" sixx.name="name" sixx.type="String" >Sortiment</sixx.object>
+				<sixx.object sixx.id="60" sixx.name="borderPoints" sixx.type="List" >
+					<sixx.object sixx.id="61" sixx.type="Point" >30@316</sixx.object>
+					<sixx.object sixx.id="62" sixx.type="Point" >80@300</sixx.object>
+					<sixx.object sixx.id="63" sixx.type="Point" >130@316</sixx.object>
+					<sixx.object sixx.id="64" sixx.type="Point" >130@367</sixx.object>
+					<sixx.object sixx.id="65" sixx.type="Point" >80@383</sixx.object>
+					<sixx.object sixx.id="66" sixx.type="Point" >30@367</sixx.object>
+					<sixx.object sixx.idref="61" ></sixx.object>
+				</sixx.object>
+				<sixx.object sixx.id="67" sixx.name="innerRectangle" sixx.type="Rectangle" >
+					<sixx.object sixx.id="68" sixx.name="origin" sixx.type="Point" >31@317</sixx.object>
+					<sixx.object sixx.id="69" sixx.name="corner" sixx.type="Point" >129@366</sixx.object>
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="70" sixx.type="DaskalosClassSymbol" >
+				<sixx.object sixx.id="71" sixx.name="subject" sixx.type="Symbol" >Faktura</sixx.object>
+				<sixx.object sixx.id="72" sixx.name="position" sixx.type="Rectangle" >
+					<sixx.object sixx.id="73" sixx.name="origin" sixx.type="Point" >260@30</sixx.object>
+					<sixx.object sixx.id="74" sixx.name="corner" sixx.type="Point" >360@180</sixx.object>
+				</sixx.object>
+				<sixx.object sixx.id="75" sixx.name="methodsText" sixx.type="UndefinedObject" >nil</sixx.object>
+				<sixx.object sixx.idref="75" sixx.name="instVarsText" ></sixx.object>
+				<sixx.object sixx.id="76" sixx.name="compositionConnections" sixx.type="Set" >
+					<sixx.object sixx.id="77" sixx.type="DaskalosCompositionConnection" >
+						<sixx.object sixx.idref="70" sixx.name="fromSymbol" ></sixx.object>
+						<sixx.object sixx.id="78" sixx.name="toSymbol" sixx.type="DaskalosClassSymbol" >
+							<sixx.object sixx.id="79" sixx.name="subject" sixx.type="Symbol" >Zbozi</sixx.object>
+							<sixx.object sixx.id="80" sixx.name="position" sixx.type="Rectangle" >
+								<sixx.object sixx.id="81" sixx.name="origin" sixx.type="Point" >30@30</sixx.object>
+								<sixx.object sixx.id="82" sixx.name="corner" sixx.type="Point" >130@180</sixx.object>
+							</sixx.object>
+							<sixx.object sixx.idref="75" sixx.name="methodsText" ></sixx.object>
+							<sixx.object sixx.idref="75" sixx.name="instVarsText" ></sixx.object>
+							<sixx.object sixx.id="83" sixx.name="compositionConnections" sixx.type="Set" >
+							</sixx.object>
+						</sixx.object>
+						<sixx.object sixx.id="84" sixx.name="name" sixx.type="String" >polozky</sixx.object>
+						<sixx.object sixx.id="85" sixx.name="cardinality" sixx.type="String" >&#42;</sixx.object>
+						<sixx.object sixx.id="86" sixx.name="stereotype" sixx.type="String" >{Bag}</sixx.object>
+						<sixx.object sixx.idref="75" sixx.name="fromPoint" ></sixx.object>
+						<sixx.object sixx.idref="75" sixx.name="toPoint" ></sixx.object>
+						<sixx.object sixx.id="87" sixx.name="controlPoints" sixx.type="List" >
+							<sixx.object sixx.idref="75" ></sixx.object>
+						</sixx.object>
+					</sixx.object>
+				</sixx.object>
+			</sixx.object>
+			<sixx.object sixx.idref="78" ></sixx.object>
+		</sixx.object>
+		<sixx.object sixx.id="88" sixx.name="diagramConnections" sixx.type="Set" >
+			<sixx.object sixx.id="89" sixx.type="DaskalosElementConnection" >
+				<sixx.object sixx.idref="78" sixx.name="fromSymbol" ></sixx.object>
+				<sixx.object sixx.idref="55" sixx.name="toSymbol" ></sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="90" sixx.type="DaskalosElementConnection" >
+				<sixx.object sixx.idref="70" sixx.name="fromSymbol" ></sixx.object>
+				<sixx.object sixx.idref="40" sixx.name="toSymbol" ></sixx.object>
+			</sixx.object>
+			<sixx.object sixx.id="91" sixx.type="DaskalosCompositionConnection" >
+				<sixx.object sixx.idref="70" sixx.name="fromSymbol" ></sixx.object>
+				<sixx.object sixx.idref="78" sixx.name="toSymbol" ></sixx.object>
+				<sixx.object sixx.idref="84" sixx.name="name" ></sixx.object>
+				<sixx.object sixx.idref="85" sixx.name="cardinality" ></sixx.object>
+				<sixx.object sixx.idref="86" sixx.name="stereotype" ></sixx.object>
+				<sixx.object sixx.id="92" sixx.name="fromPoint" sixx.type="Point" >260@105</sixx.object>
+				<sixx.object sixx.id="93" sixx.name="toPoint" sixx.type="Point" >130@105</sixx.object>
+				<sixx.object sixx.id="94" sixx.name="controlPoints" sixx.type="List" >
+					<sixx.object sixx.id="95" sixx.type="Point" >195@105</sixx.object>
+				</sixx.object>
+			</sixx.object>
+		</sixx.object>
+	</sixx.object>
+</sixx>
