@@ -1,0 +1,761 @@
+<HTML>
+<STYLE TYPE="TEXT/CSS">
+TABLE.UML {
+	BORDER-WIDTH: 1PX 1PX 1PX 1PX;
+	BORDER-SPACING: 0PX;
+	BORDER-STYLE: SOLID SOLID SOLID SOLID;
+	BORDER-COLOR: BLACK BLACK BLACK BLACK;
+	BORDER-COLLAPSE: SEPARATE;
+	BACKGROUND-COLOR: WHITE;
+}
+
+CODE {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 80%;
+}
+
+PRE {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 80%;
+}
+
+H1 {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 144%;
+	FONT-STYLE: BOLD;
+}
+
+H2 {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 120%;
+	FONT-STYLE: BOLD;
+}
+
+H3 {
+	FONT-FAMILY: ARIAL;
+	FONT-SIZE: 100%;
+	FONT-STYLE: BOLD;
+}
+
+</STYLE>
+<HEAD>
+<TITLE>
+pujcovna Saty</TITLE>
+</HEAD>
+<BODY>
+<H1>pujcovna Saty</H1>
+<B>author&#40;s&#41;: </B>Zubovich Arina
+<BR>
+<P>
+Pujcovna saty  je jednoduchy navrh objektoveho modelu&#44; ktery v sobe drzi zaznamy o pujckach satu&#44; jakemu zakaznikovi a z jake pobocky.<BR>
+<BR>
+Cilem projektu je definovat vztah mezi zakaznikem&#44; zapujcenym satem&#44; mistem zapujceni a dobou zapujceni.<BR>
+Pomoci metod ziskavame celkovou cenu za pujceni.<BR>
+<BR>
+Definovany nasledujici tridy:<BR>
+Saty<BR>
+Pobocka<BR>
+Vypujcka<BR>
+Zakaznik<BR>
+<BR>
+Ve tridach jsou definovany nasledujici promenne:<BR>
+Zakaznik:<BR>
+- Jmeno &#40;string&#41;<BR>
+- Prijmeni &#40;string&#41;<BR>
+- Telefon &#40;string&#41;<BR>
+- Datum narozeni &#40;date&#41;<BR>
+<BR>
+&#352;aty:<BR>
+- Model &#40;string&#41;<BR>
+- Velikost&#40;date&#41;<BR>
+- Barva&#40;string&#41;<BR>
+- Cena za den &#40;number&#41;<BR>
+<BR>
+Pobocka:<BR>
+- Nazev &#40;string&#41;<BR>
+- Ulice &#40;string&#41;<BR>
+- Cislo &#40;number&#41;<BR>
+- Telefon &#40;string&#41;<BR>
+<BR>
+Vypujcka:<BR>
+- Pocet dnu &#40;string&#41;<BR>
+- Zakaznik &#40;object&#41;<BR>
+- &#352;aty&#40;object&#41;<BR>
+- Pobocka &#40;object&#41;<BR>
+<BR>
+<BR>
+V modelu jsou pouzity metody:<BR>
+ve tride Zakaznik pro zobrazeni celeho jmena a veku&#44;<BR>
+ve tride Saty pro zjisteni saty k vyrazeni &#40;stari vice nez 18 let&#41;&#44;<BR>
+ve tride Vypujcka metoda na zjisteni ceny za vypujceni saty&#40;cena saty za den  &#42; pocet dnu&#41;.<BR>
+<BR>
+<BR>
+Pravidla:<BR>
+1&#41;Zakaznikum musi byt vice nez 18 let. <BR>
+2&#41;Ulice musi mit cislo domu.<BR>
+3&#41; Saty musi byt vyrobleny v 2015 roce nebo vice<BR>
+4&#41;Vypujcka je mozna jenom na vice 2 dnu<BR>
+<BR>
+Dotazy:<BR>
+<BR>
+1&#41; Vyberte kde cenaCelkem bude se &gt;10000 <BR>
+2&#41; Vypsat zakazniki ktere pujcili ne v cesku <BR>
+3&#41; vyberte kde zakazniku &gt; 20 let <BR>
+4&#41;Vyberte pobocky ktere se nachazi v Cesku <BR>
+5&#41;Vypiste vsechni zakazniky ktere pujcili  zlute sate<BR>
+6&#41;Vypeste co pucil konkretni zakaznik-  Arina Zubovich <BR>
+<BR>
+<BR>
+<BR>
+
+</P>
+
+<BR>
+<HR>
+<H2>Workspace</H2>
+<PRE>
+1&#41;Dotaz: Vyberte kde cenaCelkem bude se &gt;10000 
+Vypujcky select: [:a | a cenaZaVypujceni&gt; 10000]
+
+2&#41; Vypsat zakazniki ktere pujcili ne v cesku 
+  Pobocky select:[: a | a zeme~= &#39;Cesko&#39;]
+
+3&#41;Dotaz: vyberte kde zakazniku &gt; 20 let 
+ &#40;Zakaznici select: [:a | a vek  &gt; 20]&#41;
+
+4&#41;Dotaz:Vyberte pobocky ktere se nachazi v Cesku 
+  Pobocky select:[: a | a zeme= &#39;Cesko&#39;]
+
+5&#41;Dotaz:Vypiste vsechni zakazniky ktere pujcili  zlute sate
+&#40;&#40;Vypujcky select: [:a | a  saty barva= &#39;zluta&#39;]&#41; &gt;&gt; [:b | b zakaznik]&#41;
+
+6&#41;Dotaz:Vypeste co vypucil konkretni zakaznik-  Arina Zubovich 
+Vypujcky select: [:x | x zakaznik jmeno = &#39;Arina&#39; ]
+
+Pravidla:
+
+1&#41;Zakaznikum musi byt vice nez 18 let. 
+&#40;Zakaznici select: [:z | z vek &lt;18]&#41; isEmpty
+
+2&#41;Ulice musi mit cislo domu.
+&#40;Pobocky select: [:z| z cislo = &#39;0&#39;]&#41;isEmpty
+
+3&#41; Saty musi byt vyrobleny v 2015 roce nebo vice
+&#40;Satys select: [:z| z rokVyroby &lt;= &#39;2015&#39; asNumber]&#41;isEmpty
+
+4&#41;Vypujcka je mozna jenom na vice 2 dnu
+&#40;Vypujcky select: [:z| z pocetDnu &lt; &#39;2&#39; asNumber]&#41;isEmpty</PRE>
+<H4>Workspace Objects</H4>
+<UL>
+
+<BR>
+<LI>
+<CODE>
+Pobocky :Set
+</CODE>
+<LI>
+<CODE>
+Satys :Set
+</CODE>
+<LI>
+<CODE>
+Vypujcky :Set
+</CODE>
+<LI>
+<CODE>
+Zakaznici :Set
+</CODE>
+</UL>
+
+<BR>
+<HR>
+<H2>Script</H2>
+<PRE>&quot;Note that variables begining with uppercase letter will be moved into the workspace pool.&quot;
+
+Zakaznici := Set new.
+
+z1 := Zakaznik new.
+z1 jmeno: &#39;Karolina&#39;.
+z1 prijmeni: &#39;Svetla&#39;.
+z1 telefon: &#39;65789383&#39;.
+z1 datumNarozeni: &#39;7 10 1970&#39; asDate.
+
+z2 := Zakaznik new.
+z2 jmeno: &#39;Tanya&#39;.
+z2 prijmeni: &#39;Marchenko&#39;.
+z2 telefon: &#39;123456785&#39;.
+z2 datumNarozeni: &#39;1 6 1989&#39; asDate.
+
+z3 := Zakaznik new.
+z3 jmeno: &#39;Arina&#39;.
+z3 prijmeni: &#39;Zubovich&#39;.
+z3 telefon: &#39;987654321&#39;.
+z3 datumNarozeni: &#39;8 9 1969&#39; asDate.
+
+z4 := Zakaznik new.
+z4 jmeno: &#39;Darya&#39;.
+z4 prijmeni: &#39;Nevelya&#39;.
+z4 telefon: &#39;657484001&#39;.
+z4 datumNarozeni: &#39;4 7 1992&#39; asDate.
+
+z5 := Zakaznik new.
+z5 jmeno: &#39;Martina&#39;.
+z5 prijmeni: &#39;Kralova&#39;.
+z5 telefon: &#39;111353374&#39;.
+z5 datumNarozeni: &#39;9 8 1999&#39; asDate.
+
+Zakaznici add: z1; add: z2; add: z3; add: z4; add: z5.
+
+Satys := Set new.
+
+a1 := Saty new.
+a1 model: &#39;Mango&#39;.
+a1 rokVyroby: 2019.
+a1 barva: &#39;zluta&#39;.
+a1 cenaZaDen: 3000.
+
+a2 := Saty new.
+a2 model: &#39;Guess&#39;.
+a2 rokVyroby: 2018.
+a2 barva: &#39;cervena&#39;.
+a2 cenaZaDen: 7000.
+
+a3 := Saty new.
+a3 model: &#39;Zara&#39;.
+a3 rokVyroby: 2015.
+a3 barva: &#39;stribrna&#39;.
+a3 cenaZaDen: 4800.
+
+a4 :=Saty new.
+
+a4 model: &#39;Marks Spenser&#39;.
+a4 rokVyroby: 2018.
+a4 barva: &#39;hneda&#39;.
+a4 cenaZaDen: 5500.
+
+a5 := Saty new.
+a5 model: &#39;Orsay&#39;.
+a5 rokVyroby: 2019.
+a5 barva: &#39; bila&#39;.
+a5 cenaZaDen: 7000.
+
+Satys add: a1; add: a2;add: a3; add: a4; add: a5.
+
+Pobocky := Set new.
+
+p1 := Pobocka new.
+p1 zeme:&#39;Cesko&#39;.
+p1 nazev: &#39;Praha&#39;.
+p1 ulice: &#39;Korunovacni&#39;.
+p1 cislo: 1.
+p1 telefon: &#39;115544770&#39;.
+
+p2 := Pobocka new.
+p2 zeme:&#39;Slovensko&#39;.
+p2 nazev: &#39;Bratislava&#39;.
+p2 ulice: &#39;Svobody&#39;.
+p2 cislo: 7.
+p2 telefon: &#39;44876528&#39;.
+
+p3 := Pobocka new.
+p3 zeme:&#39;Cesko&#39;.
+p3 nazev: &#39;Praha-Suchdol&#39;.
+p3 ulice: &#39;Kamycka&#39;.
+p3 cislo: 105.
+p3 telefon: &#39;224566687924&#39;.
+
+p4 := Pobocka new.
+p4 zeme:&#39;Madjarsko&#39;.
+p4 nazev: &#39;Budapest&#39;.
+p4 ulice: &#39;Central&#39;.
+p4 cislo: 87.
+p4 telefon: &#39;68974565&#39;.
+
+p5 := Pobocka new.
+p5 zeme:&#39;Rakousko&#39;.
+p5 nazev: &#39;Viden&#39;.
+p5 ulice: &#39;Slepa&#39;.
+p5 cislo: 97.
+p5 telefon: &#39;999765056&#39;.
+
+Pobocky add: p1; add: p2; add: p3; add: p4; add: p5.
+
+Vypujcky := Set new.
+
+v1 := Vypujcka new.
+v1 zakaznik: z1.
+v1 saty: a1.
+v1 pocetDnu: 5.
+v1 pobocka: p1.
+
+
+v2 := Vypujcka new.
+v2 zakaznik: z2.
+v2 saty: a2.
+v2 pocetDnu: 10.
+v2 pobocka: p1.
+
+
+v3 := Vypujcka new.
+v3 zakaznik: z5.
+v3 saty: a5.
+v3 pocetDnu: 15.
+v3 pobocka: p1.
+
+
+v4 := Vypujcka new.
+v4 zakaznik: z3.
+v4 saty: a3.
+v4 pocetDnu: 2.
+v4 pobocka: p5.
+
+
+v5 := Vypujcka new.
+v5 zakaznik: z4.
+v5 saty: a1.
+v5 pocetDnu: 14.
+v5 pobocka: p3.
+
+
+Vypujcky add: v1; add: v2; add: v3; add: v4; add: v5.</PRE>
+<HR>
+<H2>Diagram</H2>
+<IMG SRC="aDaskalosProject.gif">
+<HR>
+<H2>Classes</H2>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Zakaznik
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+datumNarozeni :Date
+</CODE>
+<BR>
+<CODE>
+jmeno :String
+</CODE>
+<BR>
+<CODE>
+prijmeni :String
+</CODE>
+<BR>
+<CODE>
+telefon :String
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+celeJmeno
+</CODE>
+<BR>
+<CODE>
+datumNarozeni
+</CODE>
+<BR>
+<CODE>
+datumNarozeni:
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+jmeno
+</CODE>
+<BR>
+<CODE>
+jmeno:
+</CODE>
+<BR>
+<CODE>
+prijmeni
+</CODE>
+<BR>
+<CODE>
+prijmeni:
+</CODE>
+<BR>
+<CODE>
+telefon
+</CODE>
+<BR>
+<CODE>
+telefon:
+</CODE>
+<BR>
+<CODE>
+vek
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+celeJmeno
+</CODE></B>
+<PRE>
+	^self jmeno &#44; &#39; &#39; &#44; self prijmeni</PRE>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     jmeno := nil.
+     telefon := nil.
+     datumNarozeni := nil.
+     prijmeni := nil.</PRE>
+<LI>
+<B><CODE>
+vek
+</CODE></B>
+<PRE>
+	^&#40;&#40;Date today subtractDate: datumNarozeni&#41; / 365.2422&#41; truncated</PRE>
+</UL>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Vypujcka
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+pobocka :Object
+</CODE>
+<BR>
+<CODE>
+pocetDnu :Number
+</CODE>
+<BR>
+<CODE>
+saty :Object
+</CODE>
+<BR>
+<CODE>
+zakaznik :Object
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+cenaZaVypujceni
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+pobocka
+</CODE>
+<BR>
+<CODE>
+pobocka:
+</CODE>
+<BR>
+<CODE>
+pocetDnu
+</CODE>
+<BR>
+<CODE>
+pocetDnu:
+</CODE>
+<BR>
+<CODE>
+saty
+</CODE>
+<BR>
+<CODE>
+saty:
+</CODE>
+<BR>
+<CODE>
+zakaznik
+</CODE>
+<BR>
+<CODE>
+zakaznik:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+cenaZaVypujceni
+</CODE></B>
+<PRE>
+	pocetDnu isNil ifTrue: [^nil].
+	saty isNil ifTrue: [^nil].
+	^pocetDnu &#42; saty cenaZaDen</PRE>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     zakaznik := nil.
+     pocetDnu := nil.
+     pobocka := nil.
+     saty := nil.</PRE>
+</UL>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Saty
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+barva :String
+</CODE>
+<BR>
+<CODE>
+cenaZaDen :Number
+</CODE>
+<BR>
+<CODE>
+model :String
+</CODE>
+<BR>
+<CODE>
+rokVyroby :Number
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+barva
+</CODE>
+<BR>
+<CODE>
+barva:
+</CODE>
+<BR>
+<CODE>
+cenaZaDen
+</CODE>
+<BR>
+<CODE>
+cenaZaDen:
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+KVyrazeni
+</CODE>
+<BR>
+<CODE>
+model
+</CODE>
+<BR>
+<CODE>
+model:
+</CODE>
+<BR>
+<CODE>
+rokVyroby
+</CODE>
+<BR>
+<CODE>
+rokVyroby:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     model := nil.
+     rokVyroby := nil.
+     cenaZaDen := nil.
+     barva := nil.</PRE>
+<LI>
+<B><CODE>
+KVyrazeni
+</CODE></B>
+<PRE>
+	^Date today year - rokVyroby &gt;= 1</PRE>
+</UL>
+<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
+<TR>
+<TD WIDTH=20%>
+<TABLE WIDTH=95% BORDER="1" CELLSPACING="0" BORDERCOLOR=BLACK>
+<TR><TD><BIG>
+<B><CODE>
+Pobocka
+</CODE></B>
+</BIG></TD></TR>
+<TR><TD>
+<I><SMALL>instance variables</SMALL></I><BR>
+<CODE>
+cislo :Number
+</CODE>
+<BR>
+<CODE>
+nazev :String
+</CODE>
+<BR>
+<CODE>
+telefon :String
+</CODE>
+<BR>
+<CODE>
+ulice :String
+</CODE>
+<BR>
+<CODE>
+zeme :String
+</CODE>
+<BR>
+</TD></TR>
+<TR><TD>
+<I><SMALL>methods</SMALL></I><BR>
+<CODE>
+cislo
+</CODE>
+<BR>
+<CODE>
+cislo:
+</CODE>
+<BR>
+<CODE>
+initialize
+</CODE>
+<BR>
+<CODE>
+nazev
+</CODE>
+<BR>
+<CODE>
+nazev:
+</CODE>
+<BR>
+<CODE>
+telefon
+</CODE>
+<BR>
+<CODE>
+telefon:
+</CODE>
+<BR>
+<CODE>
+ulice
+</CODE>
+<BR>
+<CODE>
+ulice:
+</CODE>
+<BR>
+<CODE>
+zeme
+</CODE>
+<BR>
+<CODE>
+zeme:
+</CODE>
+<BR>
+</TD></TR>
+</TABLE>
+</TD>
+<TD VALIGN="TOP">
+<P>
+
+</P>
+</TD>
+</TR>
+</TABLE>
+<H4>code of non-accessing methods: </H4>
+<UL>
+<LI>
+<B><CODE>
+initialize
+</CODE></B>
+<PRE>
+&quot;generated by Daskalos&quot;
+
+     super initialize.
+     nazev := nil.
+     ulice := nil.
+     cislo := nil.
+     telefon := nil.
+     zeme := nil.</PRE>
+</UL>
+<HR>
+<H2>Links</H2>
+<A HREF="aDaskalosProject.xml">Data file</A> and 
+<A HREF="aDaskalosProject.st">class source</A>.
+
+<BR>
+
+<BR>
+<CODE>
+Generated by Daskalos - Object Modeling Tutor &#40;C&#41; 2006 V. Merunka
+</CODE>
+
+<BR>
+<CODE>
+May 3&#44; 2019
+</CODE>
+</BODY></HTML>
