@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <st-source>
-<time-stamp>From VisualWorks® NonCommercial, 7.4.1 of May 30, 2006 on April 26, 2026 at 9:04:59 am</time-stamp>
+<time-stamp>From VisualWorks® NonCommercial, 7.4.1 of May 30, 2006 on April 26, 2026 at 1:17:17 pm</time-stamp>
 
 
 <class>
@@ -186,6 +186,12 @@
 	ratings := Rating allInstances select: [:r | r book = self].
 	ratings isEmpty ifTrue: [^0].
 	^(ratings collect: [:r | r value]) avg asFloat</body>
+
+<body package="DaskalosUserClasses" selector="numberOfRatings">numberOfRatings
+	| ratings |
+	ratings := Rating allInstances select: [:r | r book = self].
+	ratings isEmpty ifTrue: [^0].
+	^ratings size</body>
 </methods>
 
 

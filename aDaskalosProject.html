@@ -40,24 +40,29 @@ H3 {
 </STYLE>
 <HEAD>
 <TITLE>
-CSKD</TITLE>
+CSKD &#40;Cesko-Slovenska Filmova Databaze&#41;</TITLE>
 </HEAD>
 <BODY>
-<H1>CSKD</H1>
+<H1>CSKD &#40;Cesko-Slovenska Filmova Databaze&#41;</H1>
 <B>author&#40;s&#41;: </B>Vladim&#237;r Martinovsk&#253;
 <BR>
 <P>
 Cilem projektu je modelovat jednoduchy system pro spravu knih&#44; autoru a uzivatelskych hodnoceni.<BR>
 <BR>
 Modelujeme:<BR>
-- Autory knih &#40;jmeno&#44; prijmeni&#44; datum narozeni&#41;<BR>
-- Knihy s vazbou na autora &#40;nazev&#44; rok vydani&#44; zanr&#41;<BR>
-- Uzivatele systemu &#40;prihlas. jmeno&#44; datum registrace&#41;<BR>
-- Hodnoceni knih uzivateli &#40;hodnota 1-5&#44; komentar&#41;<BR>
 <BR>
-Hodnota hodnoceni je automaticky orizena na rozsah 0-5 &#40;hodnoty mimo rozsah jsou nahrazeny nejblizsim platnym cislem&#41;.<BR>
+Autory knih &#40;jmeno&#44; prijmeni&#44; datum narozeni&#41;.<BR>
+Knihy s vazbou na autora &#40;nazev&#44; rok vydani&#44; zanr&#41;.<BR>
+Uzivatele systemu &#40;prihlasovaci jmeno&#44; datum registrace&#41;.<BR>
+Hodnoceni knih uzivateli &#40;hodnota 1-5&#44; komentar&#41;.<BR>
+<BR>
+Vlastnosti systemu:<BR>
+<BR>
 Kazda kniha ma prave jednoho autora.<BR>
-Hodnoceni jsou nezavisla &#40;jeden uzivatel muze hodnotit stejnou knihu vicekrat&#41;.
+Kazde hodnoceni je svazano s jednou knihou a jednim uzivatelem.<BR>
+Jeden uzivatel muze hodnotit stejnou knihu vicekrat.<BR>
+Hodnota hodnoceni je automaticky omezena &#40;clampovana&#41; do rozsahu 0-5.<BR>
+Knihy maji vypocitane prumerne hodnoceni a pocet hodnoceni.
 </P>
 
 <BR>
@@ -85,7 +90,13 @@ Books asSortedCollection: [:a :b | a averageRating &gt; b averageRating]
 &#40;Books asSortedCollection: [:a :b | a publicationYear &gt; b publicationYear]&#41; detect: [:b | b author fullName = &#39;Dick Francis&#39;]
 
 &quot;vsechny knihy od Dicka Francise&quot;
-Books select: [:b | b author fullName = &#39;Dick Francis&#39;]</PRE>
+Books select: [:b | b author fullName = &#39;Dick Francis&#39;]
+
+&quot;ratingy kde &#382;&#225;nr je Dystopian&#44; average_rating je &gt; 3&#44; user je john_doe a autor knihy je orwell&quot;
+Ratings select: [:r | r book genre =&#39;Dystopian&#39;  and: [r user username = &#39;john_doe&#39; and: [ r book author fullName = &#39;George Orwell&#39;  and: [ r book averageRating &gt; 3 ] ] ] ]
+
+&quot;nejvice hodnocene knihy&quot;
+Books asSortedCollection: [:a :b | a numberOfRatings &gt; b numberOfRatings]</PRE>
 <H4>Workspace Objects</H4>
 <UL>
 
@@ -408,6 +419,10 @@ name:
 </CODE>
 <BR>
 <CODE>
+numberOfRatings
+</CODE>
+<BR>
+<CODE>
 publicationYear
 </CODE>
 <BR>
@@ -454,6 +469,15 @@ initialize
      publicationYear := nil.
      genre := nil.
      author := nil.</PRE>
+<LI>
+<B><CODE>
+numberOfRatings
+</CODE></B>
+<PRE>
+	| ratings |
+	ratings := Rating allInstances select: [:r | r book = self].
+	ratings isEmpty ifTrue: [^0].
+	^ratings size</PRE>
 </UL>
 <TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH=100%>
 <TR>
