@@ -40,10 +40,10 @@ H3 {
 </STYLE>
 <HEAD>
 <TITLE>
-CSKD &#40;Cesko-Slovenska Filmova Databaze&#41;</TITLE>
+CSKD &#40;Cesko-Slovenska Knizni Databaze&#41;</TITLE>
 </HEAD>
 <BODY>
-<H1>CSKD &#40;Cesko-Slovenska Filmova Databaze&#41;</H1>
+<H1>CSKD &#40;Cesko-Slovenska Knizni Databaze&#41;</H1>
 <B>author&#40;s&#41;: </B>Vladim&#237;r Martinovsk&#253;
 <BR>
 <P>
@@ -187,7 +187,13 @@ b6 name: &#39;Odds Against&#39;;
     genre: &#39;Crime&#39;;
     author: a3.
 
-Books add: b1; add: b2; add: b3; add: b4; add: b5; add: b6.
+b7 := Book new.
+b7 name: &#39;1985&#39;;
+    publicationYear: 1984;
+    genre: &#39;Dystopian&#39;;
+    author: a1.
+
+Books add: b1; add: b2; add: b3; add: b4; add: b5; add: b6; add: b7.
 
 &quot;=============================================================================================&quot;
 &quot;U&#381;IVATEL&#201;&quot;
@@ -215,49 +221,67 @@ Users add: u1; add: u2; add: u3.
 
 Ratings := Set new.
 
-h1 := Rating new.
-h1 book: b1;
+r1 := Rating new.
+r1 book: b1;
     user: u1;
     value: 5;
     comment: &#39;Amazing&#39;.
 
-h2 := Rating new.
-h2 book: b1;
+r2 := Rating new.
+r2 book: b1;
     user: u2;
     value: 4;
     comment: &#39;Very good&#39;.
 
-h3 := Rating new.
-h3 book: b3;
+r3 := Rating new.
+r3 book: b3;
     user: u1;
     value: 5;
     comment: &#39;Loved it&#39;.
 
-h4 := Rating new.
-h4 book: b3;
+r4 := Rating new.
+r4 book: b3;
     user: u2;
     value: 1;
     comment: &#39;Horrendous&#39;.
 
-h5 := Rating new.
-h5 book: b4;
+r5 := Rating new.
+r5 book: b4;
     user: u1;
     value: 4;
     comment: &#39;Classic racing thriller&#39;.
 
-h6 := Rating new.
-h6 book: b4;
+r6 := Rating new.
+r6 book: b4;
     user: u3;
     value: 5;
     comment: &#39;Brilliant debut&#39;.
 
-h7 := Rating new.
-h7 book: b2;
+r7 := Rating new.
+r7 book: b2;
     user: u3;
     value: 5;
     comment: &#39;Masterpiece of satire&#39;.
 
-Ratings add: h1; add: h2; add: h3; add: h4; add: h5; add: h6; add: h7.
+r8 := Rating new.
+r8 book: b7;
+    user: u2;
+    value: 2;
+    comment: &#39;Not as good as 1984&#39;.
+
+r9 := Rating new.
+r9 book: b7;
+    user: u1;
+    value: 2;
+    comment: &#39;Jane is right&#33;&#33;&#33;&#39;.
+
+r10 := Rating new.
+r10 book: b1;
+    user: u3;
+    value: 5;
+    comment: &#39;The best dystopian ever written&#39;.
+
+Ratings add: r1; add: r2; add: r3; add: r4; add: r5; add: r6; add: r7; add: r8; add: r9; add: r10.
 </PRE>
 <HR>
 <H2>Diagram</H2>
